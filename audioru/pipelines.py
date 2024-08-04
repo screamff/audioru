@@ -35,7 +35,7 @@ class AudioruPipeline:
                     f.write(item['file_content'])
             name = self.items[0].get('name').strip() + '.mp3'
             output_file = out_path / name
-            command = f"{exe_path} -i {file_path} -vn -ar 44100 -ac 2 -b:a 192k -y {out_path / output_file}"
+            command = f"{exe_path} -i {file_path} -vn -ar 44100 -ac 2 -b:a 320k -y {out_path / output_file}"
             subprocess.call(command, shell=False)
 
 
