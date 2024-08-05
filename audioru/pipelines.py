@@ -40,15 +40,14 @@ class AudioruPipeline:
 
 
 class MusicPipeline:
-
     def open_spider(self, spider):
-        self.file = open(out_path / "results.json", "w", encoding='utf-8')
+        self.items = []
 
     def close_spider(self, spider):
-        self.file.close()
+        with open(out_path / "results.json", "w", encoding='utf-8') as file:
+            json.dump(self.items, file, ensure_ascii=False, indent=2)
 
     def process_item(self, item, spider):
         if item.get('m3u8_url'):
-            line = json.dumps(dict(item), ensure_ascii=False, indent=2)
-            self.file.write(line + '\n')
+            self.items.append(dict(item))
         return item
